@@ -1,0 +1,2 @@
+CALL_METHOD ComponentAddress("020d3869346218a5e8deaaf2001216dc00fcacb79fb43e30ded79a") "create_proof" ResourceAddress("03e94d02282ea324df74898c4dfab61d4a62e5f48848a42fdb0068");
+CALL_METHOD ComponentAddress("02ceb13f1cb0fbe6910efd71f0c43075f083fd290d3151a3120a21") "change_price" Decimal("10");

@@ -13,7 +13,7 @@ blueprint! {
     }
 
     impl TokenSale {
-        pub fn new(price_per_token: Decimal) -> ComponentAddress {
+        pub fn new(price_per_token: Decimal) -> (ComponentAddress, Bucket) {
             // Creating a new token called "UsefulToken"
             let my_bucket: Bucket = ResourceBuilder::new_fungible()
                 .metadata("name", "UsefulToken")
@@ -32,14 +32,16 @@ blueprint! {
                 .method("change_price", rule!(require(seller_badge.resource_address())))
                 .default(rule!(allow_all));
 
-            Self {
+            let component_address: ComponentAddress = Self {
                 useful_tokens_vault: Vault::with_bucket(my_bucket),
                 xrd_tokens_vault: Vault::new(RADIX_TOKEN),
                 price_per_token: price_per_token
             }
             .instantiate()
             .add_access_check(access_rules)
-            .globalize()
+            .globalize();
+
+            return (component_address, seller_badge)
         }
 
         pub fn buy(&mut self, funds: Bucket) -> Bucket {

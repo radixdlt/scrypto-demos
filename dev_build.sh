@@ -26,10 +26,10 @@ cd ./1-token-creation/
 # Resetting resim to get a new clean environment
 resim reset
 
-# Creating an admin account and a user account to use for the testing of the token sale
+# Creating an seller account and a user account to use for the testing of the token sale
 OP1=$(resim new-account)
-export admin_private_key=$(echo "$OP1" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
-export admin_account=$(echo "$OP1" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
+export seller_private_key=$(echo "$OP1" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
+export seller_account=$(echo "$OP1" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
 
 # Publishing the package to resim
 export package=$(resim publish ./package.wasm | sed -nr "s/Success! New Package: ([[:alnum:]_]+)/\1/p")
@@ -40,16 +40,20 @@ export component=$(echo "$CP_OP" | sed -nr "s/└─ Component: ([[:alnum:]_]+)/
 export useful_token=$(echo "$CP_OP" | sed -nr "s/.*Resource: ([[:alnum:]_]+)/\1/p" | sed '1!d')
 
 echo "\
-export admin_private_key=$admin_private_key
-export admin_account=$admin_account
+export xrd=030000000000000000000000000000000000000000000000000004
+
+export seller_private_key=$seller_private_key
+export seller_account=$seller_account
 
 export package=$package
 
 export component=$component
 export useful_token=$useful_token" > vars.sh
 echo "\
-\$admin_private_key=$admin_private_key
-\$admin_account=$admin_account
+\$xrd=030000000000000000000000000000000000000000000000000004
+
+\$seller_private_key=$seller_private_key
+\$seller_account=$seller_account
 
 \$package=$package
 
@@ -67,14 +71,14 @@ cd ./2-token-sale/
 # Resetting resim to get a new clean environment
 resim reset
 
-# Creating an admin account and a user account to use for the testing of the token sale
+# Creating an seller account and a user account to use for the testing of the token sale
 OP1=$(resim new-account)
-export admin_private_key=$(echo "$OP1" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
-export admin_account=$(echo "$OP1" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
+export seller_private_key=$(echo "$OP1" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
+export seller_account=$(echo "$OP1" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
 
 OP2=$(resim new-account)
-export user_private_key=$(echo "$OP2" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
-export user_account=$(echo "$OP2" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
+export buyer_private_key=$(echo "$OP2" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
+export buyer_account=$(echo "$OP2" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
 
 # Publishing the package to resim
 export package=$(resim publish ./package.wasm | sed -nr "s/Success! New Package: ([[:alnum:]_]+)/\1/p")
@@ -85,22 +89,26 @@ export component=$(echo "$CP_OP" | sed -nr "s/└─ Component: ([[:alnum:]_]+)/
 export useful_token=$(echo "$CP_OP" | sed -nr "s/.*Resource: ([[:alnum:]_]+)/\1/p" | sed '1!d')
 
 echo "\
-export admin_private_key=$admin_private_key
-export admin_account=$admin_account
+export xrd=030000000000000000000000000000000000000000000000000004
 
-export user_private_key=$user_private_key
-export user_account=$user_account
+export seller_private_key=$seller_private_key
+export seller_account=$seller_account
+
+export buyer_private_key=$buyer_private_key
+export buyer_account=$buyer_account
 
 export package=$package
 
 export component=$component
 export useful_token=$useful_token" > vars.sh
 echo "\
-\$admin_private_key=$admin_private_key
-\$admin_account=$admin_account
+\$xrd=030000000000000000000000000000000000000000000000000004
 
-\$user_private_key=$user_private_key
-\$user_account=$user_account
+\$seller_private_key=$seller_private_key
+\$seller_account=$seller_account
+
+\$buyer_private_key=$buyer_private_key
+\$buyer_account=$buyer_account
 
 \$package=$package
 
@@ -118,14 +126,14 @@ cd ./3-authenticated-token-sale/
 # Resetting resim to get a new clean environment
 resim reset
 
-# Creating an admin account and a user account to use for the testing of the token sale
+# Creating an seller account and a user account to use for the testing of the token sale
 OP1=$(resim new-account)
-export admin_private_key=$(echo "$OP1" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
-export admin_account=$(echo "$OP1" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
+export seller_private_key=$(echo "$OP1" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
+export seller_account=$(echo "$OP1" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
 
 OP2=$(resim new-account)
-export user_private_key=$(echo "$OP2" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
-export user_account=$(echo "$OP2" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
+export buyer_private_key=$(echo "$OP2" | sed -nr "s/Private key: ([[:alnum:]_]+)/\1/p")
+export buyer_account=$(echo "$OP2" | sed -nr "s/Account component address: ([[:alnum:]_]+)/\1/p")
 
 # Publishing the package to resim
 export package=$(resim publish ./package.wasm | sed -nr "s/Success! New Package: ([[:alnum:]_]+)/\1/p")
@@ -134,31 +142,39 @@ export package=$(resim publish ./package.wasm | sed -nr "s/Success! New Package:
 CP_OP=$(resim call-function $package TokenSale new 0.5)
 export component=$(echo "$CP_OP" | sed -nr "s/└─ Component: ([[:alnum:]_]+)/\1/p")
 export useful_token=$(echo "$CP_OP" | sed -nr "s/.*Resource: ([[:alnum:]_]+)/\1/p" | sed '1!d')
-export admin_badge=$(echo "$CP_OP" | sed -nr "s/.*Resource: ([[:alnum:]_]+)/\1/p" | sed '2!d')
+export seller_badge=$(echo "$CP_OP" | sed -nr "s/.*Resource: ([[:alnum:]_]+)/\1/p" | sed '2!d')
 
 echo "\
-export admin_private_key=$admin_private_key
-export admin_account=$admin_account
+export xrd=030000000000000000000000000000000000000000000000000004
 
-export user_private_key=$user_private_key
-export user_account=$user_account
+export seller_private_key=$seller_private_key
+export seller_account=$seller_account
+
+export buyer_private_key=$buyer_private_key
+export buyer_account=$buyer_account
 
 export package=$package
 
 export component=$component
 export useful_token=$useful_token
-export admin_badge=$admin_badge" > vars.sh
+export seller_badge=$seller_badge" > vars.sh
 echo "\
-\$admin_private_key=$admin_private_key
-\$admin_account=$admin_account
+\$xrd=030000000000000000000000000000000000000000000000000004
 
-\$user_private_key=$user_private_key
-\$user_account=$user_account
+\$seller_private_key=$seller_private_key
+\$seller_account=$seller_account
+
+\$buyer_private_key=$buyer_private_key
+\$buyer_account=$buyer_account
 
 \$package=$package
 
 \$component=$component
 \$useful_token=$useful_token
-\$admin_badge=$admin_badge" > vars.ps1
+\$seller_badge=$seller_badge" > vars.ps1
+
+echo "\
+CALL_METHOD ComponentAddress(\"$seller_account\") \"create_proof\" ResourceAddress(\"$seller_badge\");
+CALL_METHOD ComponentAddress(\"$component\") \"change_price\" Decimal(\"10\");" > change_price.rtm
 
 cd ..

@@ -256,3 +256,127 @@ This section takes you through how a token can be created in Scrypto through a b
     ```
 
 1. We have now created a component and a new token!
+
+### Token Sale
+
+This section takes you through how a token can be created in Scrypto through a blueprint and sold.
+
+
+1. Change your current working directory to be that of the example. Since this walk through is for the token sale example, then run the following command to change into that directory:
+
+    ```sh
+    cd ./2-token-sale
+    ```
+
+1. The first thing that you need to do is to setup your environment variables with the script files that we have provided. Lets first reset resim through:
+
+    ```sh
+    resim reset
+    ```
+
+    Then, depending on what operating system you are on, you would want to run the `vars.sh` or the `vars.ps1` file. If you are on MacOS or Linux, then run the `vars.sh` file through:
+    
+    ```sh
+    source ./vars.sh
+    ```
+
+    If you are on Windows (Powershell) then you can set the environment variables through: 
+
+    ```sh
+    ./vars.ps1
+    ```
+
+1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a two new accounts which we will be using for the seller and the buyer. We can do that through:
+
+    ```sh
+    resim new-account
+    resim new-account
+    ```
+
+1. We are now ready to push our package to our local simulator. This is done through:
+
+    ```sh
+    resim publish ./package.wasm
+    ```
+
+1. With the package published to the local simulator, the blueprints included there can be called and components of these blueprints can be instantiated. We will be instantiating a new `TokenSale` component and with it will come the token that we are creating. The component can be instantiated through: 
+
+    ```sh
+    resim call-function $package TokenSale new 0.5
+    ```
+
+1. We have now created a new component and token! We can now attempt to buy some of those tokens from the buyer's account. Lets first switch to the buyer's account through: 
+
+    ```sh
+    resim set-default-account $buyer_account $buyer_private_key
+    ```
+
+1. With the account switched, we can now buy some tokens! We will do that through: 
+
+    ```sh
+    resim call-method $component buy 300,$xrd
+    ```
+
+### Authenticated Token Sale
+
+This section takes you through how a token can be created in Scrypto through a blueprint and sold. In addition to that, there are a number of authenticated methods which are implemented on this component which allow the seller to change some parameters later on.
+
+
+1. Change your current working directory to be that of the example. Since this walk through is for the authenticated token sale example, then run the following command to change into that directory:
+
+    ```sh
+    cd ./3-authenticated-token-sale
+    ```
+
+1. The first thing that you need to do is to setup your environment variables with the script files that we have provided. Lets first reset resim through:
+
+    ```sh
+    resim reset
+    ```
+
+    Then, depending on what operating system you are on, you would want to run the `vars.sh` or the `vars.ps1` file. If you are on MacOS or Linux, then run the `vars.sh` file through:
+    
+    ```sh
+    source ./vars.sh
+    ```
+
+    If you are on Windows (Powershell) then you can set the environment variables through: 
+
+    ```sh
+    ./vars.ps1
+    ```
+
+1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a two new accounts which we will be using for the seller and the buyer. We can do that through:
+
+    ```sh
+    resim new-account
+    resim new-account
+    ```
+
+1. We are now ready to push our package to our local simulator. This is done through:
+
+    ```sh
+    resim publish ./package.wasm
+    ```
+
+1. With the package published to the local simulator, the blueprints included there can be called and components of these blueprints can be instantiated. We will be instantiating a new `TokenSale` component and with it will come the token that we are creating. The component can be instantiated through: 
+
+    ```sh
+    resim call-function $package TokenSale new 0.5
+    ```
+
+1. Lets now assume that the seller wishes to change the price of their tokens from 0.5 XRD per token to 10 XRD per token, they can do that through the `change_price` method. We will be using a transaction manifest file for this. We will run it by:
+
+    ```sh
+    resim run change_price.rtm
+    ```
+
+1. With the price changed to 10 XRD per token instead of 0.5 per token, we can now attempt to purchase the tokens as the buyer and then examine how much tokens we get. We can do that through:
+
+    ```sh
+    resim set-default-account $buyer_account $buyer_private_key
+    resim call-method $component buy 300,$xrd
+    resim show $buyer_account
+    ```
+
+    We can see that our account has got 30 useful tokens in our account as a result of the purchase. 
