@@ -2,5 +2,6 @@
     "rust-analyzer.linkedProjects": [
         "1-token-creation/Cargo.toml",
         "2-token-sale/Cargo.toml",
+        "3-authenticated-token-sale/Cargo.toml",
     ]
 }
