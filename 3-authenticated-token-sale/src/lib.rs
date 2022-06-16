@@ -20,16 +20,16 @@ blueprint! {
                 .metadata("symbol", "UT")
                 .initial_supply(1000);
 
-            // Creating a new admin badge which we will give the withdraw authority to
-            let admin_badge: Bucket = ResourceBuilder::new_fungible()
-                .metadata("name", "Admin Badge")
-                .metadata("symbol", "ADMIN")
+            // Creating a new seller badge which we will give the withdraw authority to
+            let seller_badge: Bucket = ResourceBuilder::new_fungible()
+                .metadata("name", "Seller Badge")
+                .metadata("symbol", "SELLER")
                 .initial_supply(1);
 
-            // Setting the access rules to only allow the admin badge to withdraw the funds or change the price
+            // Setting the access rules to only allow the seller badge to withdraw the funds or change the price
             let access_rules: AccessRules = AccessRules::new()
-                .method("withdraw_funds", rule!(require(admin_badge.resource_address())))
-                .method("change_price", rule!(require(admin_badge.resource_address())))
+                .method("withdraw_funds", rule!(require(seller_badge.resource_address())))
+                .method("change_price", rule!(require(seller_badge.resource_address())))
                 .default(rule!(allow_all));
 
             Self {
@@ -49,7 +49,7 @@ blueprint! {
         }
 
         pub fn withdraw_funds(&mut self, amount: Decimal) -> Bucket {
-            self.xrd_tokens_vault.take_all()
+            self.xrd_tokens_vault.take(amount)
         }
 
         pub fn change_price(&mut self, price: Decimal) {
