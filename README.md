@@ -208,6 +208,9 @@ And with that we are done! We have created our full token sale blueprint which a
 
 ## Running the Examples
 
+| **On Windows** | You should run the examples using the PowerShell and run the following command first: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process`  |
+| -------- | :--- |
+
 ### Token Creation
 
 This section takes you through how a token can be created in Scrypto through a blueprint. 
@@ -234,7 +237,7 @@ This section takes you through how a token can be created in Scrypto through a b
     If you are on Windows (Powershell) then you can set the environment variables through: 
 
     ```sh
-    ./vars.ps1
+    . .\vars.ps1
     ```
 
 1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a new account (which we are calling the admin account) which will be instantiating the `TokenSale` component. We can do that through:
@@ -283,7 +286,7 @@ This section takes you through how a token can be created in Scrypto through a b
     If you are on Windows (Powershell) then you can set the environment variables through: 
 
     ```sh
-    ./vars.ps1
+    . .\vars.ps1
     ```
 
 1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a two new accounts which we will be using for the seller and the buyer. We can do that through:
@@ -343,7 +346,7 @@ This section takes you through how a token can be created in Scrypto through a b
     If you are on Windows (Powershell) then you can set the environment variables through: 
 
     ```sh
-    ./vars.ps1
+    . .\vars.ps1
     ```
 
 1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a two new accounts which we will be using for the seller and the buyer. We can do that through:
