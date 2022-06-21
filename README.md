@@ -116,7 +116,7 @@ pub fn new(price_per_token: Decimal) -> ComponentAddress {
 | **Note** | Notice how the XRD vault is created through `Vault::new` while the useful tokens vault is created through `Vault::with_bucket`. These two functions allow us to either create an empty vault, or to create a vault with some initial amount that is obtained from a bucket. |
 | -------- | :--- |
 
-We now have a way of storing the XRD sent to the component, and we have a method used to create a new `TokenSale` component. The only thing that is remaining for the token sale is the method which performs the actual sale of tokens. Let's call this method `buy`. Users would call this method with a bucket of XRD, based on that it would determine how much tokens can be bought and returns them to the user. This method would look like the following:
+We now have a way of storing the XRD sent to the component, and we have a function used to create a new `TokenSale` component. The only thing that is remaining for the token sale is the method which performs the actual sale of tokens. Let's call this method `buy`. Users would call this method with a bucket of XRD, based on that it would determine how much tokens can be bought and returns them to the user. This method would look like the following:
 
 ```rust
 pub fn buy(&mut self, funds: Bucket) -> Bucket {
@@ -171,7 +171,7 @@ We have defined our methods but we now have a problem: anybody can call these me
         }
     ```
 
-2. With our new badge created, we need to inform the Radix Engine that it should require that the seller badge is present when the `withdraw_funds` or `change_price` methods are called. This is done by defining the access rules through the `AccessRules` struct and then assining them through the `.add_access_check()` method after instantiation. The code for this looks like the following:
+2. With our new badge created, we need to inform the Radix Engine that it should require that the seller badge is present when the `withdraw_funds` or `change_price` methods are called. This is done by defining the access rules through the `AccessRules` struct and then assigning them through the `.add_access_check()` method after instantiation. The code for this looks like the following:
 
     ```rust
     pub fn new(price_per_token: Decimal) -> ComponentAddress {
