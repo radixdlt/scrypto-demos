@@ -10,7 +10,7 @@ The following are the topics that each of the three packages are based on:
 | - | -------------- | ------ |
 | 1 | Token Creation | This package is designed to walk you through the creation of a simple token in Scrypto. It introduces the idea of the `ResourceBuilder` as well as some of the options available on the resource builder. This is the first time that you see vaults but there is no vault interactions that occur here. | 
 | 2 | Token Sale     | With the token created, we would now like to accept some kind of XRD payments in exchange for our token: this package walks you through precisely just that. This package offers a more detailed example of how different vaults can be used in a component and how you can perform simple token exchanges through your component. | 
-| 3 | Authenticated Token Sale | At this point, we have created a token, have creates a simple way to sell the token, but there is some functionality missing from our dApp, namely: the withdrawal of funds from the component and changing the price of tokens. This package introduces you to authorization in Scrypto and how badges can be used to allow you to perform only-admin-actions. |
+| 3 | Authenticated Token Sale | At this point, we have created a token, have created a simple way to sell the token, but there is some functionality missing from our dApp, namely: the withdrawal of funds from the component and changing the price of tokens. This package introduces you to authorization in Scrypto and how badges can be used to allow you to perform admin-only actions. |
 
 ## Goals
 
