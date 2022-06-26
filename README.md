@@ -10,7 +10,7 @@ The following are the topics that each of the three packages are based on:
 | - | -------------- | ------ |
 | 1 | Token Creation | This package is designed to walk you through the creation of a simple token in Scrypto. It introduces the idea of the `ResourceBuilder` as well as some of the options available on the resource builder. This is the first time that you see vaults but there is no vault interactions that occur here. | 
 | 2 | Token Sale     | With the token created, we would now like to accept some kind of XRD payments in exchange for our token: this package walks you through precisely just that. This package offers a more detailed example of how different vaults can be used in a component and how you can perform simple token exchanges through your component. | 
-| 3 | Authenticated Token Sale | At this point, we have created a token, have creates a simple way to sell the token, but there is some functionality missing from our dApp, namely: the withdrawal of funds from the component and changing the price of tokens. This package introduces you to authorization in Scrypto and how badges can be used to allow you to perform only-admin-actions. |
+| 3 | Authenticated Token Sale | At this point, we have created a token, have created a simple way to sell the token, but there is some functionality missing from our dApp, namely: the withdrawal of funds from the component and changing the price of tokens. This package introduces you to authorization in Scrypto and how badges can be used to allow you to perform admin-only actions. |
 
 ## Goals
 
@@ -116,7 +116,7 @@ pub fn new(price_per_token: Decimal) -> ComponentAddress {
 | **Note** | Notice how the XRD vault is created through `Vault::new` while the useful tokens vault is created through `Vault::with_bucket`. These two functions allow us to either create an empty vault, or to create a vault with some initial amount that is obtained from a bucket. |
 | -------- | :--- |
 
-We now have a way of storing the XRD sent to the component, and we have a method used to create a new `TokenSale` component. The only thing that is remaining for the token sale is the method which performs the actual sale of tokens. Let's call this method `buy`. Users would call this method with a bucket of XRD, based on that it would determine how much tokens can be bought and returns them to the user. This method would look like the following:
+We now have a way of storing the XRD sent to the component, and we have a function used to create a new `TokenSale` component. The only thing that is remaining for the token sale is the method which performs the actual sale of tokens. Let's call this method `buy`. Users would call this method with a bucket of XRD, based on that it would determine how much tokens can be bought and returns them to the user. This method would look like the following:
 
 ```rust
 pub fn buy(&mut self, funds: Bucket) -> Bucket {
@@ -171,7 +171,7 @@ We have defined our methods but we now have a problem: anybody can call these me
         }
     ```
 
-2. With our new badge created, we need to inform the Radix Engine that it should require that the seller badge is present when the `withdraw_funds` or `change_price` methods are called. This is done by defining the access rules through the `AccessRules` struct and then assining them through the `.add_access_check()` method after instantiation. The code for this looks like the following:
+2. With our new badge created, we need to inform the Radix Engine that it should require that the seller badge is present when the `withdraw_funds` or `change_price` methods are called. This is done by defining the access rules through the `AccessRules` struct and then assigning them through the `.add_access_check()` method after instantiation. The code for this looks like the following:
 
     ```rust
     pub fn new(price_per_token: Decimal) -> ComponentAddress {
@@ -208,6 +208,9 @@ And with that we are done! We have created our full token sale blueprint which a
 
 ## Running the Examples
 
+| **On Windows** | You should run the examples using the PowerShell and run the following command first: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process`  |
+| -------- | :--- |
+
 ### Token Creation
 
 This section takes you through how a token can be created in Scrypto through a blueprint. 
@@ -234,7 +237,7 @@ This section takes you through how a token can be created in Scrypto through a b
     If you are on Windows (Powershell) then you can set the environment variables through: 
 
     ```sh
-    ./vars.ps1
+    . .\vars.ps1
     ```
 
 1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a new account (which we are calling the admin account) which will be instantiating the `TokenSale` component. We can do that through:
@@ -283,7 +286,7 @@ This section takes you through how a token can be created in Scrypto through a b
     If you are on Windows (Powershell) then you can set the environment variables through: 
 
     ```sh
-    ./vars.ps1
+    . .\vars.ps1
     ```
 
 1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a two new accounts which we will be using for the seller and the buyer. We can do that through:
@@ -343,7 +346,7 @@ This section takes you through how a token can be created in Scrypto through a b
     If you are on Windows (Powershell) then you can set the environment variables through: 
 
     ```sh
-    ./vars.ps1
+    . .\vars.ps1
     ```
 
 1. We are now ready to go through the example. The first thing that we would like to do for this example is to create a two new accounts which we will be using for the seller and the buyer. We can do that through:
