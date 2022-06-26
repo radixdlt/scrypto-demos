@@ -1,8 +1,8 @@
-# TBD WN
+# Intro To Scrypto
 
 ## Structure
 
-This repository contains the source code of the TBD WN webinar held on June, 28th 2022. The three packages included here are designed to walk you through multiple stages of developing a blueprint, up until a point where this blueprint has all of the important pieces in place. 
+This repository contains the source code of the Intro To Scrypto webinar held on June, 28th 2022. The three packages included here are designed to walk you through multiple stages of developing a blueprint, up until a point where this blueprint has all of the important pieces in place. 
 
 The following are the topics that each of the three packages are based on:
 
