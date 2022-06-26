@@ -50,15 +50,15 @@ export package=$package
 export component=$component
 export useful_token=$useful_token" > vars.sh
 echo "\
-\$xrd=030000000000000000000000000000000000000000000000000004
+\$xrd=\"030000000000000000000000000000000000000000000000000004\"
 
-\$seller_private_key=$seller_private_key
-\$seller_account=$seller_account
+\$seller_private_key=\"$seller_private_key\"
+\$seller_account=\"$seller_account\"
 
-\$package=$package
+\$package=\"$package\"
 
-\$component=$component
-\$useful_token=$useful_token" > vars.ps1
+\$component=\"$component\"
+\$useful_token=\"$useful_token\"" > vars.ps1
 
 cd ..
 
@@ -102,18 +102,18 @@ export package=$package
 export component=$component
 export useful_token=$useful_token" > vars.sh
 echo "\
-\$xrd=030000000000000000000000000000000000000000000000000004
+\$xrd=\"030000000000000000000000000000000000000000000000000004\"
 
-\$seller_private_key=$seller_private_key
-\$seller_account=$seller_account
+\$seller_private_key=\"$seller_private_key\"
+\$seller_account=\"$seller_account\"
 
-\$buyer_private_key=$buyer_private_key
-\$buyer_account=$buyer_account
+\$buyer_private_key=\"$buyer_private_key\"
+\$buyer_account=\"$buyer_account\"
 
-\$package=$package
+\$package=\"$package\"
 
-\$component=$component
-\$useful_token=$useful_token" > vars.ps1
+\$component=\"$component\"
+\$useful_token=\"$useful_token\"" > vars.ps1
 
 cd ..
 
@@ -159,19 +159,19 @@ export component=$component
 export useful_token=$useful_token
 export seller_badge=$seller_badge" > vars.sh
 echo "\
-\$xrd=030000000000000000000000000000000000000000000000000004
+\$xrd=\"030000000000000000000000000000000000000000000000000004\"
 
-\$seller_private_key=$seller_private_key
-\$seller_account=$seller_account
+\$seller_private_key=\"$seller_private_key\"
+\$seller_account=\"$seller_account\"
 
-\$buyer_private_key=$buyer_private_key
-\$buyer_account=$buyer_account
+\$buyer_private_key=\"$buyer_private_key\"
+\$buyer_account=\"$buyer_account\"
 
-\$package=$package
+\$package=\"$package\"
 
-\$component=$component
-\$useful_token=$useful_token
-\$seller_badge=$seller_badge" > vars.ps1
+\$component=\"$component\"
+\$useful_token=\"$useful_token\"
+\$seller_badge=\"$seller_badge\"" > vars.ps1
 
 echo "\
 CALL_METHOD ComponentAddress(\"$seller_account\") \"create_proof\" ResourceAddress(\"$seller_badge\");
