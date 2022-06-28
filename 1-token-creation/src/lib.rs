@@ -3,7 +3,7 @@ use scrypto::prelude::*;
 blueprint! {
     struct TokenSale {
         // The vault where the UsefulTokens will be stored.
-        vault: Vault
+        useful_tokens_vault: Vault
     }
 
     impl TokenSale {
@@ -15,7 +15,7 @@ blueprint! {
                 .initial_supply(1000);
 
             Self {
-                vault: Vault::with_bucket(my_bucket)
+                useful_tokens_vault: Vault::with_bucket(my_bucket)
             }
             .instantiate()
             .globalize()
