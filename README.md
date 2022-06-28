@@ -55,12 +55,12 @@ pub fn new() -> ComponentAddress {
     // Creating a new token called "UsefulToken"
     let my_bucket: Bucket = ResourceBuilder::new_fungible()
         .metadata("name", "UsefulToken")
-        .metadata("symbol", "UT")
+        .metadata("symbol", "USEFUL")
         .initial_supply(1000);
 
     // Creating a new component and storing the tokens in the component's vault.
     Self {
-        vault: Vault::with_bucket(my_bucket)
+        useful_tokens_vault: Vault::with_bucket(my_bucket)
     }
     .instantiate()
     .globalize()
@@ -99,7 +99,7 @@ pub fn new(price_per_token: Decimal) -> ComponentAddress {
     // Creating a new token called "UsefulToken"
     let my_bucket: Bucket = ResourceBuilder::new_fungible()
         .metadata("name", "UsefulToken")
-        .metadata("symbol", "UT")
+        .metadata("symbol", "USEFUL")
         .initial_supply(1000);
 
     // Creating a new component and storing the tokens in the component's vault.
@@ -152,7 +152,7 @@ We have defined our methods but we now have a problem: anybody can call these me
             // Creating a new token called "UsefulToken"
             let my_bucket: Bucket = ResourceBuilder::new_fungible()
                 .metadata("name", "UsefulToken")
-                .metadata("symbol", "UT")
+                .metadata("symbol", "USEFUL")
                 .initial_supply(1000);
 
             // ---- This is the new badge we're creating in this step ----
@@ -178,7 +178,7 @@ We have defined our methods but we now have a problem: anybody can call these me
         // Creating a new token called "UsefulToken"
         let my_bucket: Bucket = ResourceBuilder::new_fungible()
             .metadata("name", "UsefulToken")
-            .metadata("symbol", "UT")
+            .metadata("symbol", "USEFUL")
             .initial_supply(1000);
 
         // Creating a new seller badge which we will give the withdraw authority to

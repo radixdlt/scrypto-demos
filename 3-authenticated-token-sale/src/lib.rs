@@ -17,7 +17,7 @@ blueprint! {
             // Creating a new token called "UsefulToken"
             let my_bucket: Bucket = ResourceBuilder::new_fungible()
                 .metadata("name", "UsefulToken")
-                .metadata("symbol", "UT")
+                .metadata("symbol", "USEFUL")
                 .initial_supply(1000);
 
             // Creating a new seller badge which we will give the withdraw authority to
