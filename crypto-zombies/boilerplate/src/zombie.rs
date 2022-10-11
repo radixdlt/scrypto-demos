@@ -47,7 +47,7 @@ impl Zombie {
 }
 
 /// An enum defining the possible items that a zombie can have on their head
-#[derive(Debug, Copy, Clone, TypeId, Encode, Decode, Describe, EnumIter, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Copy, Clone, TypeId, Encode, Decode, Describe, EnumIter)]
 pub enum HeadItem {
     ArmyHat,
     PonyTail,
@@ -59,7 +59,7 @@ pub enum HeadItem {
 }
 
 /// An enum defining the possible eyes that a zombie can have
-#[derive(Debug, Copy, Clone, TypeId, Encode, Decode, Describe, EnumIter, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Copy, Clone, TypeId, Encode, Decode, Describe, EnumIter)]
 pub enum EyeItem {
     DefaultEyes,
     EyesWithGlasses,
@@ -75,7 +75,7 @@ pub enum EyeItem {
 }
 
 /// An enum describing the possible shirts that a zombie can have.
-#[derive(Debug, Copy, Clone, TypeId, Encode, Decode, Describe, EnumIter, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Debug, Copy, Clone, TypeId, Encode, Decode, Describe, EnumIter)]
 pub enum ShirtItem {
     Classic,
     White,
