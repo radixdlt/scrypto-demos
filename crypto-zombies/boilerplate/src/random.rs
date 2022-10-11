@@ -37,7 +37,7 @@ pub fn pseudo_random_number(to_inclusive: u128) -> u128 {
 pub fn pseudo_random_choose<T: Clone>(array: &[T]) -> T {
     // Return the value at the index specified by the pseudo random number.
     array
-        .get(pseudo_random_number(array.len() as u128) as usize)
+        .get(pseudo_random_number(array.len() as u128 - 1) as usize)
         .expect("Value at a trusted index can not fail")
         .clone()
 }
