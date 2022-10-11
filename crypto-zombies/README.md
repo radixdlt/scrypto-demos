@@ -1,4 +1,4 @@
-# Crypto Zombies Factory Contract
+# Crypto Zombies Factory Blueprint
 
 This directory contains the boilerplate code and the complete code from the Crypto Zombies webinar conducted on October 12, 2022. 
 
