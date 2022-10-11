@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "boilerplate/Cargo.toml",
+        "complete_code/Cargo.toml",
+    ],
+}
