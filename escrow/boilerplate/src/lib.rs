@@ -138,7 +138,7 @@ blueprint! {
         /// # Arguments
         ///
         /// - `obligation_proof`: [`Proof`] - A proof containing the obligation badge that defines
-        /// the party's obligation to the escrow and it is owed (this is the obligation NFT).
+        /// the party's obligation to the escrow and the funds owed (this is the obligation NFT).
         /// - `funds` [`Bucket`] - A bucket of the funds to deposit into the escrow. The contents of
         /// this bucket need to match specified in the NFT's `amount_to_pay`.
         ///
@@ -153,8 +153,8 @@ blueprint! {
         /// Withdraws funds from the escrow after both parties have deposited their funds.
         ///
         /// This function is used to withdraw the amount owed to each party after the escrow has
-        /// obtained the funds agreed on by both parties. After does all necessary checks and after
-        /// it ensures that the escrow has been fulfilled, the following logic takes place:
+        /// obtained the funds agreed on by both parties. After it does all necessary checks and 
+        /// after it ensures that the escrow has been fulfilled, the following logic takes place:
         ///
         /// 1. Loads the [`EscrowObligation`] data in the passed NFT. This is needed to get the
         /// `amount_to_get` data and its corresponding [`Vault`].
