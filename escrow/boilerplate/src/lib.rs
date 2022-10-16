@@ -48,6 +48,11 @@ blueprint! {
         /// This resource address will be stored in the component state since we would want to
         /// verify that the NFT badges presented to the component match this [`ResourceAddress`].
         obligation_non_fungible_resource: ResourceAddress,
+
+        /// A boolean which is used to cache whether the escrow has been fulfilled or not. When 
+        /// [`true`] then this escrow has been fulfilled and all parties are allowed to withdraw
+        /// the tokens owed to them. When [`false`], then this escrow has not been fulfilled yet.
+        is_escrow_fulfilled: bool
     }
 
     impl Escrow {
@@ -138,7 +143,7 @@ blueprint! {
         /// # Arguments
         ///
         /// - `obligation_proof`: [`Proof`] - A proof containing the obligation badge that defines
-        /// the party's obligation to the escrow and the funds owed (this is the obligation NFT).
+        /// the party's obligation to the escrow and it is owed (this is the obligation NFT).
         /// - `funds` [`Bucket`] - A bucket of the funds to deposit into the escrow. The contents of
         /// this bucket need to match specified in the NFT's `amount_to_pay`.
         ///
@@ -202,37 +207,43 @@ blueprint! {
         ///
         /// [`bool`] - [`true`] if the escrow is fulfilled from all sides. [`false`] if it has not
         /// been fulfilled.
-        pub fn is_escrow_fulfilled(&self) -> bool {
-            self.vaults
-                .iter()
-                .map(|(resource_specifier, vault)| {
-                    match resource_specifier {
-                        // If this is a fungible resource specifier, then check that the resource
-                        // address and the amount both match.
-                        ResourceSpecifier::Fungible {
-                            resource_address,
-                            amount,
-                        } => {
-                            vault.resource_address() == *resource_address
-                                && vault.amount() >= *amount
-                        }
+        pub fn is_escrow_fulfilled(&mut self) -> bool {
+            if self.is_escrow_fulfilled {
+                self.is_escrow_fulfilled
+            } else {
+                self.is_escrow_fulfilled = self.vaults
+                    .iter()
+                    .map(|(resource_specifier, vault)| {
+                        match resource_specifier {
+                            // If this is a fungible resource specifier, then check that the resource
+                            // address and the amount both match.
+                            ResourceSpecifier::Fungible {
+                                resource_address,
+                                amount,
+                            } => {
+                                vault.resource_address() == *resource_address
+                                    && vault.amount() >= *amount
+                            }
 
-                        // If this is a non-fungible resource specifier then check that the resource
-                        // address matches and that the set of non-fungible ids in the specifier is
-                        // a subset of those in the vault.
-                        ResourceSpecifier::NonFungible {
-                            resource_address,
-                            non_fungible_ids,
-                        } => {
-                            vault.resource_address() == *resource_address
-                                && vault
-                                    .non_fungible_ids()
-                                    .iter()
-                                    .all(|x| non_fungible_ids.contains(x))
+                            // If this is a non-fungible resource specifier then check that the resource
+                            // address matches and that the set of non-fungible ids in the specifier is
+                            // a subset of those in the vault.
+                            ResourceSpecifier::NonFungible {
+                                resource_address,
+                                non_fungible_ids,
+                            } => {
+                                vault.resource_address() == *resource_address
+                                    && vault
+                                        .non_fungible_ids()
+                                        .iter()
+                                        .all(|x| non_fungible_ids.contains(x))
+                            }
                         }
-                    }
-                })
-                .all(|x| x)
+                    })
+                    .all(|x| x);
+                self.is_escrow_fulfilled
+            }
+            
         }
     }
 }
