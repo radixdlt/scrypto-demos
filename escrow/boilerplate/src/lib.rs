@@ -1,7 +1,7 @@
 use scrypto::prelude::*;
 
 blueprint! {
-    /// A struct that defines a two-party single-resource escrow blueprint.
+    /// A struct that defines a two-party two-resource escrow blueprint.
     ///
     /// A component of this blueprint is instantiated by providing the terms of the escrow or the
     /// exchange. This is done by providing two [`ResourceSpecifier`]s which specify the amounts to
