@@ -1,9 +1,9 @@
 //! This module implements the [ZombieFactory] blueprint and all associated types. This blueprint
 //! has the required knowledge to create new zombies.
 
-use scrypto::prelude::*;
 use crate::random::*;
 use crate::zombie::*;
+use scrypto::prelude::*;
 
 blueprint! {
     /// A structure that defines the type of the state held by `ZombieFactory` components.
@@ -36,7 +36,7 @@ blueprint! {
 
             // Creating a new non-fungible resource (token) which will be used as an on-chain
             // representation of the zombies.
-            let zombie_resource: ResourceAddress = ResourceBuilder::new_non_fungible()
+            let zombie_resource: ResourceAddress = ResourceBuilder::new_non_fungible(NonFungibleIdType::UUID)
                 .metadata("name", "Crypto Zombies")
                 .metadata("description", "An NFT of a Crypto Zombie!")
                 .mintable(rule!(require(internal_admin_badge.resource_address())), LOCKED)
@@ -52,9 +52,9 @@ blueprint! {
         }
 
         /// Creates a new **pseudo** random zombie.
-        /// 
-        /// This function creates a new **pseudo** random zombie through the **pseudo** random 
-        /// number generators defined in [`crate::random`] and returns an NFT of the zombie in 
+        ///
+        /// This function creates a new **pseudo** random zombie through the **pseudo** random
+        /// number generators defined in [`crate::random`] and returns an NFT of the zombie in
         /// a bucket.
         pub fn new_random_zombie(&self) -> Bucket {
             let head_item: HeadItem = pseudo_random_enum_variant();
