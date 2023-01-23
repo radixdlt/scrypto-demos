@@ -3,7 +3,7 @@
 //! Engine to generate UUIDs.
 
 use strum::IntoEnumIterator;
-use scrypto::core::Runtime;
+use scrypto::runtime::Runtime;
 
 /// Generates a **pseudo** random variant of an enum.
 /// 
