@@ -1,12 +1,12 @@
 $xrd="030000000000000000000000000000000000000000000000000004"
 
-$seller_private_key="7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
-$seller_account="020d3869346218a5e8deaaf2001216dc00fcacb79fb43e30ded79a"
+$seller_private_key="66081403ac1fabe43e9017b4aef84bc07ce6963d19e803dcf05723f3a03c6529"
+$seller_account="account_sim1qv8ttc3k4yvp58kg8h2nz3zk2v9lcc3z73nvwfkm9kys8ejma0"
 
-$buyer_private_key="35be322d094f9d154a8aba4733b8497f180353bd7ae7b0a15f90b586b549f28b"
-$buyer_account="02e0905317d684478c275540e2ed7170f217e0c557805f7fd2a0d3"
+$buyer_private_key="eaee67d3b98c34c59c3fb024870acda5e00f191cfda261cd01c4ece7e85c718e"
+$buyer_account="account_sim1qdznm0cdkp0x7aeh0h090umr2nz83fprcprqfkctjgmsz7ysd8"
 
-$package="011e59adf5e55006511f920de71a8e551f4ffb25b7967950a7ee54"
+$package=""
 
-$component="027eee1f44fb4cb60cdf976ca0828dd385c20e55e174408fbc1b77"
-$useful_token="0319bfebcc9a09f3c3564cae0b6d8116a3fbbc092311acbc3e6d10"
+$component=""
+$useful_token=""

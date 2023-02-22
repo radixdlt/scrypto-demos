@@ -1,9 +1,9 @@
 $xrd="030000000000000000000000000000000000000000000000000004"
 
-$seller_private_key="7c9fa136d4413fa6173637e883b6998d32e1d675f88cddff9dcbcf331820f4b8"
-$seller_account="020d3869346218a5e8deaaf2001216dc00fcacb79fb43e30ded79a"
+$seller_private_key="8361f0c8d6b4547b8c5039787e64cd20865f8a0ee3d44a8e3458d676ea795f15"
+$seller_account="account_sim1qdee59f059p03uj94hcrha7acfdpn3pykdxtvk6jsfdqzcu962"
 
-$package="013659737292e5dfb1a21f40a44ec3ac9d13dd8d1bcb3e65b16eb8"
+$package=""
 
-$component="0278940ff6a560f6bc31d1f8b47938722b5cfa82b442a85ff82d38"
-$useful_token="03039eecab3c637abaa59c382381d87b32baa383916e67262a16af"
+$component=""
+$useful_token=""
