@@ -1,9 +1,0 @@
-export xrd=030000000000000000000000000000000000000000000000000004
-
-export seller_private_key=8361f0c8d6b4547b8c5039787e64cd20865f8a0ee3d44a8e3458d676ea795f15
-export seller_account=account_sim1qdee59f059p03uj94hcrha7acfdpn3pykdxtvk6jsfdqzcu962
-
-export package=
-
-export component=
-export useful_token=

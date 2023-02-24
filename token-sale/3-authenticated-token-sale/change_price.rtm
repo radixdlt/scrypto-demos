@@ -1,2 +1,0 @@
-CALL_METHOD ComponentAddress("account_sim1qwauddjksn2zffs2a2jf2epvmslcjjznmhmv6fj8vnjq48l038") "create_proof" ResourceAddress("");
-CALL_METHOD ComponentAddress("") "change_price" Decimal("10");

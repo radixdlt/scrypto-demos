@@ -25,6 +25,7 @@ mod token_sale {
                 useful_tokens_vault: Vault::with_bucket(my_bucket),
                 xrd_tokens_vault: Vault::new(RADIX_TOKEN),
                 price_per_token: price_per_token
+                
             }
             .instantiate()
             .globalize()
