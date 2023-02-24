@@ -409,4 +409,4 @@ This section takes you through how a token can be created in Scrypto through a b
     resim show $buyer_account
     ```
 
-    We can see that our account has got 30 useful tokens in our account as a result of the purchase. 
+We can see that our account has got 30 useful tokens in our account as a result of the purchase. 
