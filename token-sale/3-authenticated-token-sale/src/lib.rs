@@ -1,6 +1,7 @@
 use scrypto::prelude::*;
 
-blueprint! {
+#[blueprint]
+mod token_sale {
     struct TokenSale {
         // The vault where the UsefulTokens will be stored.
         useful_tokens_vault: Vault,
@@ -13,35 +14,36 @@ blueprint! {
     }
 
     impl TokenSale {
-        pub fn new(price_per_token: Decimal) -> (ComponentAddress, Bucket) {
+        pub fn instantiate_token_sale(price_per_token: Decimal) -> (ComponentAddress, Bucket) {
+
             // Creating a new token called "UsefulToken"
             let my_bucket: Bucket = ResourceBuilder::new_fungible()
                 .metadata("name", "UsefulToken")
                 .metadata("symbol", "USEFUL")
-                .initial_supply(1000);
+                .mint_initial_supply(1000);
 
             // Creating a new seller badge which we will give the withdraw authority to
             let seller_badge: Bucket = ResourceBuilder::new_fungible()
                 .metadata("name", "Seller Badge")
                 .metadata("symbol", "SELLER")
-                .initial_supply(1);
+                .mint_initial_supply(1);
 
             // Setting the access rules to only allow the seller badge to withdraw the funds or change the price
             let access_rules: AccessRules = AccessRules::new()
-                .method("withdraw_funds", rule!(require(seller_badge.resource_address())))
-                .method("change_price", rule!(require(seller_badge.resource_address())))
-                .default(rule!(allow_all));
+                .method("withdraw_funds", rule!(require(seller_badge.resource_address())), LOCKED)
+                .method("change_price", rule!(require(seller_badge.resource_address())), LOCKED)
+                .default(rule!(allow_all), LOCKED);
 
-            let component_address: ComponentAddress = Self {
+            let mut token_sale: TokenSaleComponent = Self {
                 useful_tokens_vault: Vault::with_bucket(my_bucket),
                 xrd_tokens_vault: Vault::new(RADIX_TOKEN),
                 price_per_token: price_per_token
             }
-            .instantiate()
-            .add_access_check(access_rules)
-            .globalize();
+            .instantiate();
+            token_sale.add_access_check(access_rules);
+            let token_sale_component_address: ComponentAddress = token_sale.globalize();
 
-            return (component_address, seller_badge)
+            return (token_sale_component_address, seller_badge)
         }
 
         pub fn buy(&mut self, funds: Bucket) -> Bucket {
